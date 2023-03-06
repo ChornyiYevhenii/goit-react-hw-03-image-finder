@@ -1,8 +1,14 @@
 import { Component } from 'react'
+import { toast } from 'react-toastify';
+import PropTypes from "prop-types"
 import { Form, FormButton, Label, Input, Header} from './Searchbar.styled'
 import { FcSearch } from "react-icons/fc"
 
 export class Searchbar extends Component{
+
+  static propTypes = {
+    onSubmit:PropTypes.func.isRequired,
+}
 
   state = { query: '' }
   onChange = event => {
@@ -10,9 +16,11 @@ export class Searchbar extends Component{
   } 
   onSubmit = event => {
     event.preventDefault();
+
     if (!this.state.query.trim()) {
-      alert('please type something')
+      return toast.warning('please type something');
     }
+
       this.props.onSubmit(this.state.query)
   }
   render() {
