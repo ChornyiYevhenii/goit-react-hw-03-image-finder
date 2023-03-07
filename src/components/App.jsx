@@ -42,7 +42,7 @@ window.scrollTo({behavior: 'smooth', top:0})
     ).catch(error => console.error(error)).finally(()=> this.setState (({isLoading})=> ({isLoading:!isLoading})));
     }
     
-  if (prevState.page !== page) {
+  if (prevState.page !== page && page !== 1) {
         this.setState(({ isLoading }) => ({ isLoading: !isLoading }));
         fetchImages(query, page).then(data => {
           const results = data.hits.map(image => ({ tags: image.tags, id: image.id, smallImage: image.webformatURL, largeImage: image.largeImageURL }));
